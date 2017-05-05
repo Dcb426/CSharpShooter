@@ -108,7 +108,9 @@
     <None Include="Resources\d.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\board.png" />
     <Content Include="Resources\enemyshoot.png" />
+    <None Include="Resources\seamless space.PNG" />
     <Content Include="Resources\ufoshoot.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

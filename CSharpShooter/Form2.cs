@@ -21,18 +21,18 @@ namespace CSharpShooter
         bool goup;
         bool godown;
         int speed = 2;
-        int score = 0;
+        public static int score;
         bool isPressed;
-        int totalEnemies = 31;
-        int currentEnemies = 30;
+        int totalEnemies = 23;
+        int currentEnemies = 23;
         int playerSpeed = 9;
-        int lives = 5;
         int number_of_bullets = 50;
         List<Control> Enemies = new List<Control>();
         public Form2()
         {
             InitializeComponent();
             playSimpleSound();
+            Form2.score = Form1.score;
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && x.Tag == "invaders" || x.Tag == "invaders2")
@@ -209,7 +209,7 @@ namespace CSharpShooter
                         {
                             if (i.Bounds.IntersectsWith(j.Bounds))
                             {
-                                score += 100;
+                                Form2.score += 100;
                                 this.Controls.Remove(i);
                                 this.Controls.Remove(j);
                                 currentEnemies--;
@@ -224,7 +224,7 @@ namespace CSharpShooter
                         {
                             if (i.Bounds.IntersectsWith(j.Bounds))
                             {
-                                score += 100;
+                                Form2.score += 100;
                                 this.Controls.Remove(i);
                                 this.Controls.Remove(j);
                                 currentEnemies--;
@@ -276,9 +276,9 @@ namespace CSharpShooter
                 }
 
             }
-            label1.Text = "Score : " + score;
+            label1.Text = "Score : " + Form2.score;
             label2.Text = "Ammo : " + number_of_bullets;
-            if ((score / 100) >= totalEnemies - 1)
+            if ((Form2.score / 100) >= 20000)
             {
                 gameOver();
                 StopSimpleSound();

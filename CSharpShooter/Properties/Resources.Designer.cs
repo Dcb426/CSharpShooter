@@ -63,6 +63,16 @@ namespace CSharpShooter.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap board {
+            get {
+                object obj = ResourceManager.GetObject("board", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap d {
             get {
                 object obj = ResourceManager.GetObject("d", resourceCulture);
@@ -96,6 +106,16 @@ namespace CSharpShooter.Properties {
         internal static System.Drawing.Bitmap M484BulletCollection1 {
             get {
                 object obj = ResourceManager.GetObject("M484BulletCollection1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap seamless_space {
+            get {
+                object obj = ResourceManager.GetObject("seamless space", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

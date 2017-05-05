@@ -20,11 +20,11 @@ namespace CSharpShooter
         bool goright;
         bool goup;
         bool godown;
-        int speed = 2;
-        int score = 0;
+        int speed = 4;
+        public static int score;
         bool isPressed;
         int totalEnemies = 16;
-        int currentEnemies = 15;
+        int currentEnemies = 14;
         int playerSpeed = 9;
         int lives = 5;
         int number_of_bullets = 30;
@@ -34,6 +34,7 @@ namespace CSharpShooter
             InitializeComponent();
             ModifyProgressBarColor.SetState(PlayerLifeBar, 2);
             playSimpleSound();
+            Form1.score = 0;
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && x.Tag == "invaders" || x.Tag == "invaders2")
@@ -43,11 +44,6 @@ namespace CSharpShooter
             }
             startGame();
 
-        }
-        private void playSample()
-        {
-            SoundPlayer sample = new SoundPlayer(@"C:\Users\user1\Documents\Visual Studio 2015\Projects\CSharpShooter\CSharpShooter\Resources\ufoshoot.wav");
-            sample.Play();
         }
         private void playSimpleSound()
         {
@@ -81,7 +77,6 @@ namespace CSharpShooter
             {
                 isPressed = true;
                 makeBullet();
-                SystemSounds.Beep.Play();
                 number_of_bullets--;
             }
 
@@ -127,11 +122,11 @@ namespace CSharpShooter
             {
                 player.Top -= playerSpeed;
             }
-            else if (godown)
+            else if (godown && player.Top <= 365)
             {
                 player.Top += playerSpeed;
             }
-            if (PlayerLifeBar.Value == 180)
+            if (PlayerLifeBar.Value >= 200)
             {
                 StopSimpleSound();
                 gameOver();
@@ -144,10 +139,11 @@ namespace CSharpShooter
                 {
                     if (((PictureBox)x).Bounds.IntersectsWith(player.Bounds))
                     {
-
-                        StopSimpleSound();
-                        gameOver();
-                        MessageBox.Show("You Have Been Captured");
+                        score -= 100;
+                        this.Controls.Remove(x);
+                        currentEnemies--;
+                        Enemies.Remove(x);
+                        PlayerLifeBar.Increment(50);
                     }
                     ((PictureBox)x).Left += speed;
                     if (((PictureBox)x).Left > 720)
@@ -162,17 +158,16 @@ namespace CSharpShooter
                 {
                     if (((PictureBox)x).Bounds.IntersectsWith(player.Bounds))
                     {
-
-                        StopSimpleSound();
-                        gameOver();
-                        MessageBox.Show("You Have Been Captured");
+                        score -= 100;
+                        this.Controls.Remove(x);
+                        currentEnemies--;
+                        Enemies.Remove(x);
+                        PlayerLifeBar.Increment(50);
                     }
-                    ((PictureBox)x).Left -= speed+1;
-                    if (((PictureBox)x).Left < 0)
+                    ((PictureBox)x).Left -= speed;
+                    if (((PictureBox)x).Left < -20)
                     {
-
-
-                        ((PictureBox)x).Top += ((PictureBox)x).Height + 40;
+                        ((PictureBox)x).Top += ((PictureBox)x).Height + 10;
                         ((PictureBox)x).Left = 720;
 
                     }
@@ -210,12 +205,11 @@ namespace CSharpShooter
                         {
                             if (i.Bounds.IntersectsWith(j.Bounds))
                             {
-                                score += 100;
+                                Form1.score += 100;
                                 this.Controls.Remove(i);
                                 this.Controls.Remove(j);
                                 currentEnemies--;
                                 Enemies.Remove(i);
-                                SystemSounds.Exclamation.Play();
                             }
                         }
                     }
@@ -225,7 +219,7 @@ namespace CSharpShooter
                         {
                             if (i.Bounds.IntersectsWith(j.Bounds))
                             {
-                                score += 100;
+                                Form1.score += 100;
                                 this.Controls.Remove(i);
                                 this.Controls.Remove(j);
                                 currentEnemies--;
@@ -251,17 +245,6 @@ namespace CSharpShooter
                             }
                         }
                     }
-                    if (i is PictureBox && i.Tag == "bullet")
-                    {
-                        if (j is PictureBox && j.Tag == "bullet2")
-                        {
-                            if (i.Bounds.IntersectsWith(j.Bounds))
-                            {
-                                this.Controls.Remove(i);
-                                this.Controls.Remove(j);
-                            }
-                        }
-                    }
                 }
             }
             foreach (Control i in this.Controls)
@@ -271,23 +254,23 @@ namespace CSharpShooter
                     if (((PictureBox)i).Bounds.IntersectsWith(player.Bounds))
                     {
                        
-                        PlayerLifeBar.Increment(25);
+                        PlayerLifeBar.Increment(20);
                         this.Controls.Remove(i);
+                        score -= 25;
                     }
                 }
 
             }
-            label1.Text = "Score : " + score;
+            label1.Text = "Score : " + Form1.score;
             label2.Text = "Ammo : " + number_of_bullets;
-            if ((score / 100) >= totalEnemies - 1)
+            if ((Form1.score / 100) >= totalEnemies - 1)
             {
                 gameOver();
                 StopSimpleSound();
-                MessageBox.Show("You Have Saved The Galaxy!!");
             }
         }
 
-        private async void makeBullet()
+        private void makeBullet()
         {
             PictureBox bullet = new PictureBox();
             bullet.Image = Properties.Resources.M484BulletCollection1;
@@ -337,7 +320,6 @@ namespace CSharpShooter
             Random rnd = new Random();
             int mon = rnd.Next(0, currentEnemies);
             makeBullet2(Enemies, mon);
-            playSample();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -355,6 +337,11 @@ namespace CSharpShooter
             Form2 frm = new Form2();
             frm.Show();
             this.Hide();
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }
