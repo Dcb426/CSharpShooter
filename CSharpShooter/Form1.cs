@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Media;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.IO;
 
 namespace CSharpShooter
 {
