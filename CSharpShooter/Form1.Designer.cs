@@ -318,7 +318,7 @@
             this.player.BackColor = System.Drawing.Color.Gray;
             this.player.BackgroundImage = global::CSharpShooter.Properties.Resources.seamless_space;
             this.player.Image = global::CSharpShooter.Properties.Resources.ship;
-            this.player.Location = new System.Drawing.Point(326, 369);
+            this.player.Location = new System.Drawing.Point(328, 350);
             this.player.Name = "player";
             this.player.Size = new System.Drawing.Size(50, 50);
             this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

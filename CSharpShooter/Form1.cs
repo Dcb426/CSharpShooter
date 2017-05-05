@@ -14,7 +14,7 @@ using System.Threading;
 namespace CSharpShooter
 {
 
-    public partial class Form1 : Form
+    public partial class Form1 : Form //level 1
     {
         bool goleft;
         bool goright;
